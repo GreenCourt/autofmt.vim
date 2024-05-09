@@ -1,17 +1,18 @@
 aug format_on_bufwritepre
   au!
-  if executable("clang-format")
-    au BufWritePre *.c,*.h call s:format("clang-format")
+  if executable("clang-format") && (filereadable(".clang-format") || filereadable("_clang-format"))
+    au BufWritePre *.c,*.h,*.cc,*.cpp,*.hpp call s:format("clang-format")
   endif
   if executable("rustfmt")
     au BufWritePre *.rs call s:format("rustfmt")
   endif
-  if executable("ruff")
+  if executable("ruff") && (isdirectory(".ruff_cache") || filereadable("ruff.toml") || filereadable(".ruff.toml"))
     au BufWritePre *.py call s:format("ruff format -")
   endif
 aug END
 
 function s:format(cmd)
+  redraw | echo "formatting..."
   let l:cur = getline(0, "$")
   let l:new = systemlist(a:cmd, join(l:cur, "\n"))
   if v:shell_error | return | endif
