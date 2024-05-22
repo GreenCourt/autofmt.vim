@@ -21,4 +21,5 @@ function s:format(cmd)
   if line('$') > len(l:new) | execute len(l:new) .',$delete' | endif
   call setline(1, l:new)
   call winrestview(l:view)
+  redraw
 endfunction
