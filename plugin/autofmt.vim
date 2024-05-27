@@ -6,7 +6,7 @@ aug format_on_bufwritepre
   if executable("rustfmt")
     au BufWritePre *.rs call s:format("rustfmt")
   endif
-  if executable("ruff") && (isdirectory(".ruff_cache") || filereadable("ruff.toml") || filereadable(".ruff.toml"))
+  if executable("ruff")
     au BufWritePre *.py call s:format("ruff format -")
   endif
 aug END
