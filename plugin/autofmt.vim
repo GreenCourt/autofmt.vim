@@ -7,7 +7,7 @@ aug format_on_bufwritepre
     au BufWritePre *.rs call s:format("rustfmt")
   endif
   if executable("ruff")
-    au BufWritePre *.py call s:format("ruff format -")
+    au BufWritePre *.py call s:format("ruff format --no-cache -")
   endif
 aug END
 
