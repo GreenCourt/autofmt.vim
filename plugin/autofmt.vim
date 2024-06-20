@@ -1,10 +1,9 @@
+let g:rustfmt_autosave = get(g:, "rustfmt_autosave", 1)
+
 aug format_on_bufwritepre
   au!
   if executable("clang-format") && (filereadable(".clang-format") || filereadable("_clang-format"))
     au BufWritePre *.c,*.h,*.cc,*.cpp,*.hpp call s:format("clang-format")
-  endif
-  if executable("rustfmt")
-    au BufWritePre *.rs call s:format("rustfmt")
   endif
   if executable("ruff")
     au BufWritePre *.py call s:format("ruff format --no-cache -")
