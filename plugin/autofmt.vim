@@ -10,7 +10,7 @@ aug format_on_bufwritepre
   endif
 aug END
 
-function s:format(cmd)
+function s:format(cmd) abort
   redraw | echo "formatting..."
   let l:cur = getline(0, "$")
   let l:new = systemlist(a:cmd, join(l:cur, "\n"))
