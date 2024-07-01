@@ -17,7 +17,7 @@ function s:format(cmd) abort
   if v:shell_error | return | endif
   if l:cur == l:new | return | endif
   let l:view = winsaveview()
-  if line('$') > len(l:new) | execute len(l:new) .',$delete' | endif
+  if line("$") > len(l:new) | execute len(l:new) .. ",$delete" | endif
   call setline(1, l:new)
   call winrestview(l:view)
   redraw
